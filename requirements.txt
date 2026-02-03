@@ -1,0 +1,14 @@
+# EWMA Ensemble for Long-Term Commodity Forecasting
+# Install: pip install -r requirements.txt
+
+# Core Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+pyarrow>=14.0.0  # For parquet file support
+
+# Visualization
+plotly>=5.18.0
+
+# Optional: For Jupyter notebook exploration
+# jupyter>=1.0.0
+

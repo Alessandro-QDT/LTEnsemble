@@ -1,0 +1,2 @@
+horizon,L,alpha,N,da_weight,da,qa,baseline_da,baseline_qa,da_improvement,qa_improvement,beats_both
+30,4,0.4,10,0.5,93.96551724137932,93.27797551249236,72.16519861859877,92.79715970977787,21.80031862278055,0.4808158027144884,True

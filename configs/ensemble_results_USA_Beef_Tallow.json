@@ -1,0 +1,308 @@
+{
+  "30": {
+    "horizon_days": 30,
+    "horizon_months": 1.0,
+    "num_models": 2,
+    "num_samples": 209,
+    "individual_models": [
+      {
+        "model_id": "545.0",
+        "directional_accuracy": 0.5707317073170731,
+        "price_accuracy": 94.40566967847306,
+        "samples": 205
+      },
+      {
+        "model_id": "997.0",
+        "directional_accuracy": 0.4878048780487805,
+        "price_accuracy": 94.17482193710637,
+        "samples": 205
+      }
+    ],
+    "ensemble_equal_weights": {
+      "directional_accuracy": 0.5365853658536586,
+      "price_accuracy": 94.44418692097277
+    },
+    "optimized_weights": {
+      "545.0": 0.9400000000000001,
+      "997.0": 0.05999999999999994
+    },
+    "optimized_accuracy": 0.5707317073170731,
+    "validation": {
+      "weights": {
+        "545.0": 0.9400000000000001,
+        "997.0": 0.05999999999999994
+      },
+      "train_accuracy": 0.6013071895424836,
+      "test_accuracy": 0.4375,
+      "train_samples": 157,
+      "test_samples": "48",
+      "train_dates": "2021-01-01 to 2023-12-29",
+      "test_dates": "2024-01-05 to 2024-12-27",
+      "comparison": {
+        "optimized_weights_test": 0.4375,
+        "equal_weights_test": 0.3958333333333333,
+        "best_individual_test": 0.4375,
+        "best_individual_model": "545.0",
+        "individual_accs": {
+          "545.0": 0.4375,
+          "997.0": 0.3958333333333333
+        }
+      }
+    }
+  },
+  "60": {
+    "horizon_days": 60,
+    "horizon_months": 2.0,
+    "num_models": 2,
+    "num_samples": 209,
+    "individual_models": [
+      {
+        "model_id": "461.0",
+        "directional_accuracy": 0.581081081081081,
+        "price_accuracy": 89.27388393302117,
+        "samples": 148
+      },
+      {
+        "model_id": "544.0",
+        "directional_accuracy": 0.6567164179104478,
+        "price_accuracy": 89.25228723748123,
+        "samples": 201
+      }
+    ],
+    "ensemble_equal_weights": {
+      "directional_accuracy": 0.6965174129353234,
+      "price_accuracy": 89.5276225037292
+    },
+    "optimized_weights": {
+      "461.0": 0.0,
+      "544.0": 1.0
+    },
+    "optimized_accuracy": 0.6567164179104478,
+    "validation": {
+      "weights": {
+        "461.0": 0.0,
+        "544.0": 1.0
+      },
+      "train_accuracy": 0.7181208053691275,
+      "test_accuracy": 0.4090909090909091,
+      "train_samples": 157,
+      "test_samples": "44",
+      "train_dates": "2021-01-01 to 2023-12-29",
+      "test_dates": "2024-01-05 to 2024-12-27",
+      "comparison": {
+        "optimized_weights_test": 0.4090909090909091,
+        "equal_weights_test": 0.6590909090909091,
+        "best_individual_test": 0.7045454545454546,
+        "best_individual_model": "461.0",
+        "individual_accs": {
+          "461.0": 0.7045454545454546,
+          "544.0": 0.4090909090909091
+        }
+      }
+    }
+  },
+  "90": {
+    "horizon_days": 90,
+    "horizon_months": 3.0,
+    "num_models": 1,
+    "num_samples": 209,
+    "individual_models": [
+      {
+        "model_id": "543.0",
+        "directional_accuracy": 0.5989847715736041,
+        "price_accuracy": 85.57649389696194,
+        "samples": 197
+      }
+    ],
+    "ensemble_equal_weights": {
+      "directional_accuracy": 0.5989847715736041,
+      "price_accuracy": 85.57649389696194
+    },
+    "optimized_weights": {
+      "543.0": 1.0
+    },
+    "optimized_accuracy": 0.5989847715736041,
+    "validation": {
+      "weights": {
+        "543.0": 1.0
+      },
+      "train_accuracy": 0.6551724137931034,
+      "test_accuracy": 0.35,
+      "train_samples": "145",
+      "test_samples": "40",
+      "train_dates": "2021-01-01 to 2023-12-29",
+      "test_dates": "2024-01-05 to 2024-12-27",
+      "comparison": null
+    }
+  },
+  "180": {
+    "horizon_days": 180,
+    "horizon_months": 6.0,
+    "num_models": 2,
+    "num_samples": 209,
+    "individual_models": [
+      {
+        "model_id": "990.0",
+        "directional_accuracy": 0.5217391304347826,
+        "price_accuracy": 75.35982213594338,
+        "samples": 184
+      },
+      {
+        "model_id": "991.0",
+        "directional_accuracy": 0.5163043478260869,
+        "price_accuracy": 74.06261714404641,
+        "samples": 184
+      }
+    ],
+    "ensemble_equal_weights": {
+      "directional_accuracy": 0.5271739130434783,
+      "price_accuracy": 75.61666076719037
+    },
+    "optimized_weights": {
+      "990.0": 0.79,
+      "991.0": 0.20999999999999996
+    },
+    "optimized_accuracy": 0.5869565217391305,
+    "validation": {
+      "weights": {
+        "990.0": 0.29,
+        "991.0": 0.71
+      },
+      "train_accuracy": 0.5833333333333334,
+      "test_accuracy": 0.7407407407407407,
+      "train_samples": 157,
+      "test_samples": "27",
+      "train_dates": "2021-01-01 to 2023-12-29",
+      "test_dates": "2024-01-05 to 2024-12-27",
+      "comparison": {
+        "optimized_weights_test": 0.7407407407407407,
+        "equal_weights_test": 0.7777777777777778,
+        "best_individual_test": 0.6666666666666666,
+        "best_individual_model": "991.0",
+        "individual_accs": {
+          "990.0": 0.4074074074074074,
+          "991.0": 0.6666666666666666
+        }
+      }
+    }
+  },
+  "270": {
+    "horizon_days": 270,
+    "horizon_months": 9.0,
+    "num_models": 1,
+    "num_samples": 209,
+    "individual_models": [
+      {
+        "model_id": "541.0",
+        "directional_accuracy": 0.49122807017543857,
+        "price_accuracy": 71.72365340988995,
+        "samples": 171
+      }
+    ],
+    "ensemble_equal_weights": {
+      "directional_accuracy": 0.49122807017543857,
+      "price_accuracy": 71.72365340988995
+    },
+    "optimized_weights": {
+      "541.0": 1.0
+    },
+    "optimized_accuracy": 0.49122807017543857,
+    "validation": {
+      "weights": {
+        "541.0": 1.0
+      },
+      "train_accuracy": 0.5378151260504201,
+      "test_accuracy": 0.35714285714285715,
+      "train_samples": "119",
+      "test_samples": "14",
+      "train_dates": "2021-01-01 to 2023-12-29",
+      "test_dates": "2024-01-05 to 2024-12-27",
+      "comparison": null
+    }
+  },
+  "360": {
+    "horizon_days": 360,
+    "horizon_months": 12.0,
+    "num_models": 1,
+    "num_samples": 209,
+    "individual_models": [
+      {
+        "model_id": "1315.0",
+        "directional_accuracy": 0.34810126582278483,
+        "price_accuracy": 58.51285043617077,
+        "samples": 158
+      }
+    ],
+    "ensemble_equal_weights": {
+      "directional_accuracy": 0.34810126582278483,
+      "price_accuracy": 58.51285043617077
+    },
+    "optimized_weights": {
+      "1315.0": 1.0
+    },
+    "optimized_accuracy": 0.34810126582278483,
+    "validation": {
+      "weights": {
+        "1315.0": 1.0
+      },
+      "train_accuracy": 0.5188679245283019,
+      "test_accuracy": 0.0,
+      "train_samples": "106",
+      "test_samples": "1",
+      "train_dates": "2021-01-01 to 2023-12-29",
+      "test_dates": "2024-01-05 to 2024-12-27",
+      "comparison": null
+    }
+  },
+  "450": {
+    "horizon_days": 450,
+    "horizon_months": 15.0,
+    "num_models": 2,
+    "num_samples": 209,
+    "individual_models": [
+      {
+        "model_id": "1312.0",
+        "directional_accuracy": 0.27586206896551724,
+        "price_accuracy": 56.03323719316729,
+        "samples": 145
+      },
+      {
+        "model_id": "1313.0",
+        "directional_accuracy": 0.27586206896551724,
+        "price_accuracy": 52.260718434215505,
+        "samples": 145
+      }
+    ],
+    "ensemble_equal_weights": {
+      "directional_accuracy": 0.27586206896551724,
+      "price_accuracy": 54.225197757773394
+    },
+    "optimized_weights": {
+      "1312.0": 0.8300000000000001,
+      "1313.0": 0.16999999999999993
+    },
+    "optimized_accuracy": 0.2896551724137931,
+    "validation": {
+      "weights": {
+        "1312.0": 0.0,
+        "1313.0": 1.0
+      },
+      "train_accuracy": 0.3978494623655914,
+      "test_accuracy": 0,
+      "train_samples": 157,
+      "test_samples": 0,
+      "train_dates": "2021-01-01 to 2023-12-29",
+      "test_dates": "2024-01-05 to 2024-12-27",
+      "comparison": {
+        "optimized_weights_test": 0,
+        "equal_weights_test": 0,
+        "best_individual_test": 0,
+        "best_individual_model": "1312.0",
+        "individual_accs": {
+          "1312.0": 0.0,
+          "1313.0": 0.0
+        }
+      }
+    }
+  }
+}
