@@ -6,21 +6,31 @@ Find best lookback (L) and alpha for each horizon
 import pandas as pd
 import numpy as np
 from datetime import datetime
+import os
+
+# Import project configuration
+from config import PARQUET_PATH, GRID_SEARCH_RESULTS, OPTIMAL_PARAMS, TRAIN_END, TEST_START, PROJECT_ID, PROJECT_NAME
 
 print("=" * 70)
 print("GRID SEARCH: OPTIMAL EWMA PARAMETERS PER HORIZON")
 print("=" * 70)
+print(f"Project: {PROJECT_ID} - {PROJECT_NAME}")
 
 # Load the complete dataset
 print("\n[1] Loading data...")
-df = pd.read_parquet('data/21_USA_Beef_Tallow/all_children_data.parquet')
+if not os.path.exists(PARQUET_PATH):
+    print(f"\n❌ ERROR: Data file not found: {PARQUET_PATH}")
+    print(f"   Run first: python fetch_data.py --project_id {PROJECT_ID} --project_name {PROJECT_NAME}")
+    exit(1)
+
+df = pd.read_parquet(PARQUET_PATH)
 df['time'] = pd.to_datetime(df['time']).dt.tz_localize(None)
 
 print(f"    Total records: {len(df):,}")
 
 # Define train/test split
-TRAIN_END = pd.Timestamp('2024-12-31')
-TEST_START = pd.Timestamp('2025-01-01')
+TRAIN_END = pd.Timestamp(TRAIN_END)
+TEST_START = pd.Timestamp(TEST_START)
 
 horizons = sorted(df['n_predict'].unique())
 print(f"    Horizons: {[int(h) for h in horizons]}")
@@ -252,14 +262,14 @@ for horizon in sorted(best_per_horizon.keys()):
 
 # Save results
 results_df = pd.DataFrame(all_results)
-results_df.to_csv('data/21_USA_Beef_Tallow/grid_search_results.csv', index=False)
+results_df.to_csv(GRID_SEARCH_RESULTS, index=False)
 
 optimal_df = pd.DataFrame(summary_rows)
-optimal_df.to_csv('data/21_USA_Beef_Tallow/optimal_ewma_params.csv', index=False)
+optimal_df.to_csv(OPTIMAL_PARAMS, index=False)
 
 print("\n" + "=" * 70)
 print("Results saved to:")
-print("  - data/21_USA_Beef_Tallow/grid_search_results.csv (all combinations)")
-print("  - data/21_USA_Beef_Tallow/optimal_ewma_params.csv (best per horizon)")
+print(f"  - {GRID_SEARCH_RESULTS} (all combinations)")
+print(f"  - {OPTIMAL_PARAMS} (best per horizon)")
 print("=" * 70)
 

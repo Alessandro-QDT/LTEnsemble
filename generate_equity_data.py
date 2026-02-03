@@ -4,18 +4,28 @@ Generate CORRECT equity curves matching the methodology in baseline_vs_ewma.py
 import pandas as pd
 import numpy as np
 import json
+import os
+
+# Import project configuration
+from config import PARQUET_PATH, EQUITY_CURVES, TRAIN_END, TEST_START, PROJECT_ID, PROJECT_NAME
 
 print("=" * 70)
 print("GENERATING CORRECT EQUITY CURVES")
 print("=" * 70)
+print(f"Project: {PROJECT_ID} - {PROJECT_NAME}")
 
 # Load data
-df = pd.read_parquet('data/21_USA_Beef_Tallow/all_children_data.parquet')
+if not os.path.exists(PARQUET_PATH):
+    print(f"\n❌ ERROR: Data file not found: {PARQUET_PATH}")
+    print(f"   Run first: python fetch_data.py --project_id {PROJECT_ID} --project_name {PROJECT_NAME}")
+    exit(1)
+
+df = pd.read_parquet(PARQUET_PATH)
 df['time'] = pd.to_datetime(df['time']).dt.tz_localize(None)
 
 # Constants
-TRAIN_END = pd.Timestamp('2024-12-31')
-TEST_START = pd.Timestamp('2025-01-01')
+TRAIN_END = pd.Timestamp(TRAIN_END)
+TEST_START = pd.Timestamp(TEST_START)
 TOP_N = 5
 
 optimal_params = {
@@ -181,9 +191,8 @@ for horizon, params in optimal_params.items():
     print(f"  Winner: {'EWMA' if ewma_final > base_final else 'BASELINE'}")
 
 # Save to JSON
-output_path = 'data/21_USA_Beef_Tallow/equity_curves.json'
-with open(output_path, 'w') as f:
+with open(EQUITY_CURVES, 'w') as f:
     json.dump(equity_data, f)
 
-print(f"\n✓ Saved to {output_path}")
+print(f"\n✓ Saved to {EQUITY_CURVES}")
 

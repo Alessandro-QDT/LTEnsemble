@@ -6,19 +6,26 @@ import pandas as pd
 import numpy as np
 import os
 
+# Import project configuration
+from config import PARQUET_PATH, TRAIN_END, TEST_START, PROJECT_ID, PROJECT_NAME
+
 print("=" * 60)
 print("QA CALCULATION FOR 270d, 360d, 450d")
 print("=" * 60)
+print(f"Project: {PROJECT_ID} - {PROJECT_NAME}")
 
 # Load data
-script_dir = os.path.dirname(os.path.abspath(__file__))
-df = pd.read_parquet(os.path.join(script_dir, 'data/21_USA_Beef_Tallow/all_children_data.parquet'))
+if not os.path.exists(PARQUET_PATH):
+    print(f"\n❌ ERROR: Data file not found: {PARQUET_PATH}")
+    exit(1)
+
+df = pd.read_parquet(PARQUET_PATH)
 df['time'] = pd.to_datetime(df['time']).dt.tz_localize(None)
 print(f"Loaded {len(df):,} records")
 
 # Constants
-TRAIN_END = pd.Timestamp('2024-12-31')
-TEST_START = pd.Timestamp('2025-01-01')
+TRAIN_END = pd.Timestamp(TRAIN_END)
+TEST_START = pd.Timestamp(TEST_START)
 
 # Optimal parameters from DA optimization (from dashboard)
 HORIZON_PARAMS = {

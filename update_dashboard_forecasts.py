@@ -6,16 +6,25 @@ Adds a new chart section showing historical prices + forecast line
 import pandas as pd
 import numpy as np
 import json
+import os
 from datetime import datetime, timedelta
 import re
+
+# Import project configuration
+from config import PARQUET_PATH, LIVE_FORECAST, PROJECT_ID, PROJECT_NAME
 
 print("=" * 70)
 print("UPDATING DASHBOARD WITH LIVE FORECASTS")
 print("=" * 70)
+print(f"Project: {PROJECT_ID} - {PROJECT_NAME}")
 
 # Load data
 print("\n[1] Loading data...")
-df = pd.read_parquet('data/21_USA_Beef_Tallow/all_children_data.parquet')
+if not os.path.exists(PARQUET_PATH):
+    print(f"\n❌ ERROR: Data file not found: {PARQUET_PATH}")
+    exit(1)
+
+df = pd.read_parquet(PARQUET_PATH)
 df['time'] = pd.to_datetime(df['time']).dt.tz_localize(None)
 
 # Get price history
@@ -31,7 +40,11 @@ print(f"    Latest date: {latest_date.strftime('%Y-%m-%d')}")
 print(f"    Current price: ${current_price:.2f}")
 
 # Load live forecasts
-with open('data/21_USA_Beef_Tallow/live_ewma_forecast.json', 'r') as f:
+if not os.path.exists(LIVE_FORECAST):
+    print(f"\n❌ ERROR: Forecast file not found: {LIVE_FORECAST}")
+    exit(1)
+
+with open(LIVE_FORECAST, 'r') as f:
     forecast_data = json.load(f)
 
 forecasts = forecast_data['forecasts']

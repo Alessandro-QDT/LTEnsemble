@@ -68,9 +68,9 @@ Our QDTNexus dashboard uses ensemble forecasting for short-term signals (1-10 da
 
 ### Data Source
 
-- **API**: SuperForecast API (`superforecast.cloud-effem.com`)
-- **Endpoint**: `/get_qml_models/21` (full children dataset)
-- **Project ID**: 21 (USA Beef Tallow)
+- **API**: SuperForecast API (`localhost:5001`)
+- **Endpoint**: `/get_qml_models/59` (full children dataset)
+- **Project ID**: 59 (Crude Oil)
 
 ### Dataset Characteristics
 

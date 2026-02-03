@@ -1,19 +1,27 @@
 """
-Generate Live EWMA Ensemble Forecasts for USA Beef Tallow
+Generate Live EWMA Ensemble Forecasts
 =========================================================
 Uses the optimized EWMA parameters to generate current forecasts
 """
 import pandas as pd
 import numpy as np
+import os
 from datetime import datetime, timedelta
 
+# Import project configuration
+from config import PARQUET_PATH, LIVE_FORECAST, PROJECT_ID, PROJECT_NAME
+
 print("=" * 70)
-print("LIVE EWMA ENSEMBLE FORECASTS - USA Beef Tallow")
+print(f"LIVE EWMA ENSEMBLE FORECASTS - {PROJECT_NAME}")
 print("=" * 70)
 
 # Load data
 print("\n[1] Loading data...")
-df = pd.read_parquet('data/21_USA_Beef_Tallow/all_children_data.parquet')
+if not os.path.exists(PARQUET_PATH):
+    print(f"\n❌ ERROR: Data file not found: {PARQUET_PATH}")
+    exit(1)
+
+df = pd.read_parquet(PARQUET_PATH)
 df['time'] = pd.to_datetime(df['time']).dt.tz_localize(None)
 print(f"    Total records: {len(df):,}")
 print(f"    Date range: {df['time'].min().strftime('%Y-%m-%d')} to {df['time'].max().strftime('%Y-%m-%d')}")
@@ -244,8 +252,8 @@ for h, f in forecasts.items():
         'confidence': round(f['confidence'], 2)
     }
 
-with open('data/21_USA_Beef_Tallow/live_ewma_forecast.json', 'w') as fp:
+with open(LIVE_FORECAST, 'w') as fp:
     json.dump(output, fp, indent=2)
 
-print(f"\n✅ Forecast saved to: data/21_USA_Beef_Tallow/live_ewma_forecast.json")
+print(f"\n✅ Forecast saved to: {LIVE_FORECAST}")
 

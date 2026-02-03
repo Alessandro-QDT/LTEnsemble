@@ -183,8 +183,8 @@ Starting with $100:
 
 ## 📈 Data Source
 
-- **API**: SuperForecast API (`superforecast.cloud-effem.com`)
-- **Endpoint**: `/get_qml_models/21` (full children dataset)
+- **API**: SuperForecast API (`localhost:5001`)
+- **Endpoint**: `/get_qml_models/59` (full children dataset)
 - **Project ID**: 21 (USA Beef Tallow)
 - **Date Range**: January 2020 - January 2026
 - **Total Records**: 5M+ forecasts

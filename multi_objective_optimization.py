@@ -13,21 +13,28 @@ import os
 from itertools import product
 import time
 
+# Import project configuration
+from config import PARQUET_PATH, MULTI_OBJ_RESULTS, DATA_DIR, TRAIN_END, TEST_START, PROJECT_ID, PROJECT_NAME
+
 print("=" * 80)
 print("MULTI-OBJECTIVE EWMA OPTIMIZATION")
 print("Goal: Beat baseline on BOTH DA and QA")
 print("=" * 80)
+print(f"Project: {PROJECT_ID} - {PROJECT_NAME}")
 
 # Load data
 print("\n[1] Loading data...")
-script_dir = os.path.dirname(os.path.abspath(__file__))
-df = pd.read_parquet(os.path.join(script_dir, 'data/21_USA_Beef_Tallow/all_children_data.parquet'))
+if not os.path.exists(PARQUET_PATH):
+    print(f"\n❌ ERROR: Data file not found: {PARQUET_PATH}")
+    exit(1)
+
+df = pd.read_parquet(PARQUET_PATH)
 df['time'] = pd.to_datetime(df['time']).dt.tz_localize(None)
 print(f"    Total records: {len(df):,}")
 
 # Constants
-TRAIN_END = pd.Timestamp('2024-12-31')
-TEST_START = pd.Timestamp('2025-01-01')
+TRAIN_END = pd.Timestamp(TRAIN_END)
+TEST_START = pd.Timestamp(TEST_START)
 
 # Search space
 HORIZONS = [30, 60, 90, 180]
@@ -403,14 +410,14 @@ if best_per_horizon:
     print(f"     • Average QA improvement: +{avg_qa_imp:.2f} pp")
 
 # Save results
-output_path = os.path.join(script_dir, 'data/21_USA_Beef_Tallow/multi_objective_results.csv')
+output_path = MULTI_OBJ_RESULTS
 results_df.to_csv(output_path, index=False)
 print(f"\n  Results saved to: {output_path}")
 
 # Save best params
 if best_per_horizon:
     best_df = pd.DataFrame(best_per_horizon.values())
-    best_path = os.path.join(script_dir, 'data/21_USA_Beef_Tallow/optimal_multi_params.csv')
+    best_path = f"{DATA_DIR}/optimal_multi_params.csv"
     best_df.to_csv(best_path, index=False)
     print(f"  Best params saved to: {best_path}")
 

@@ -1,22 +1,30 @@
 """
-Generate Beef Tallow Dashboard with Live EWMA Forecasts
+Generate Dashboard with Live EWMA Forecasts
 =======================================================
 Shows historical prices + live forecast lines for each horizon
 """
 import pandas as pd
 import numpy as np
 import json
+import os
 from datetime import datetime, timedelta
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
+# Import project configuration
+from config import PARQUET_PATH, LIVE_FORECAST, PROJECT_ID, PROJECT_NAME
+
 print("=" * 70)
-print("GENERATING BEEF TALLOW FORECAST DASHBOARD")
+print(f"GENERATING {PROJECT_NAME} FORECAST DASHBOARD")
 print("=" * 70)
 
 # Load data
 print("\n[1] Loading data...")
-df = pd.read_parquet('data/21_USA_Beef_Tallow/all_children_data.parquet')
+if not os.path.exists(PARQUET_PATH):
+    print(f"\n❌ ERROR: Data file not found: {PARQUET_PATH}")
+    exit(1)
+
+df = pd.read_parquet(PARQUET_PATH)
 df['time'] = pd.to_datetime(df['time']).dt.tz_localize(None)
 
 # Get unique prices (from target_var_price which is the current price at each date)
@@ -184,7 +192,7 @@ recent_prices = prices[prices['date'] >= '2024-01-01'].copy()
 
 fig = make_subplots(
     rows=1, cols=1,
-    subplot_titles=["USA Beef Tallow - Historical Prices + EWMA Forecasts"]
+    subplot_titles=[f"{PROJECT_NAME} - Historical Prices + EWMA Forecasts"]
 )
 
 # Add historical prices
@@ -265,7 +273,7 @@ fig.add_annotation(
 # Update layout
 fig.update_layout(
     title=dict(
-        text=f"<b>USA Beef Tallow</b> - EWMA Ensemble Forecasts<br><sup>Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')} | Current: ${current_price:.2f}</sup>",
+        text=f"<b>{PROJECT_NAME}</b> - EWMA Ensemble Forecasts<br><sup>Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')} | Current: ${current_price:.2f}</sup>",
         font=dict(size=20, color='white'),
         x=0.5
     ),
@@ -320,10 +328,10 @@ for horizon, forecast in sorted(forecasts.items()):
         'confidence': round(forecast['confidence'], 2)
     })
 
-with open('data/21_USA_Beef_Tallow/live_ewma_forecast.json', 'w') as f:
+with open(LIVE_FORECAST, 'w') as f:
     json.dump(summary, f, indent=2)
 
-print(f"✅ Forecast JSON saved to: data/21_USA_Beef_Tallow/live_ewma_forecast.json")
+print(f"✅ Forecast JSON saved to: {LIVE_FORECAST}")
 
 # Print summary
 print("\n" + "=" * 70)
